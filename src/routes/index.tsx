@@ -5,5 +5,7 @@ export const Route = createFileRoute('/')({
 })
 
 function App() {
-  return <div></div>
+  return <div>
+    <h1>Welcome to the Steam App</h1>
+  </div>
 }
