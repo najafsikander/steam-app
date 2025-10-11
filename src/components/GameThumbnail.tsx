@@ -1,9 +1,9 @@
 import { Image } from '@unpic/react'
-import type { game_summary } from '@/type'
+import type { game_info } from '@/type'
 import type { FC } from 'react'
 
 type Props = {
-    game: game_summary
+    game: game_info
 }
 const GameThumbnail: FC<Props> = ({ game }) => {
     return(
@@ -12,7 +12,7 @@ const GameThumbnail: FC<Props> = ({ game }) => {
           >
             <Image
               src={game.image}
-              alt={game.title}
+              alt={game.name}
               className="w-full h-auto rounded-t-md"
               layout="constrained"
               width={200}
@@ -20,8 +20,8 @@ const GameThumbnail: FC<Props> = ({ game }) => {
               loading="lazy"
             />
             <div className="px-4 py-2">
-              <h2 className="text-lg font-semibold">{game.title}</h2>
-              <p className="text-gray-400">{game.description}</p>
+              <h2 className="text-lg font-semibold">{game.name}</h2>
+              <p className="text-gray-400">{game.price}</p>
             </div>
           </div>
     )

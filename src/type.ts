@@ -1,6 +1,17 @@
-export type game_summary = {
+export type api_response = {
+    status: number;
+    message: string;
+    data: any
+}
+
+export type game_info = {
     id: string;
-    title: string;
-    description: string;
     image: string;
+    name: string;
+    price: string;
+}
+
+export type game_search_response = {
+    search: [game_info],
+    total: number
 }

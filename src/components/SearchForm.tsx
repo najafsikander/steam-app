@@ -5,8 +5,13 @@ import type { FC } from 'react'
 
 const schema = z.object({
   search: z.string().min(1, 'Search term is required'),
+
 })
-const SearchForm: FC = () => {
+
+type Props = {
+  setSearchGame: (term: string) => void
+}
+const SearchForm: FC<Props> = ({setSearchGame}) => {
   // Form instance
   const searchForm = useForm({
     validators: {
@@ -18,6 +23,7 @@ const SearchForm: FC = () => {
     onSubmit: ({ value }) => {
       console.log(value)
       alert(`Searching for: ${value.search}`)
+      setSearchGame(value.search);
     },
   })
 
