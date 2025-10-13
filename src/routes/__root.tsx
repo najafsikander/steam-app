@@ -7,8 +7,10 @@ import Header from '../components/Header'
 import appCss from '../styles.css?url'
 import MainLayout from '@/layout/MainLayout'
 import Footer from '@/components/Footer'
+import Error from '@/components/Error'
 
 export const Route = createRootRoute({
+  errorComponent: Error,
   head: () => ({
     meta: [
       {
