@@ -22,7 +22,6 @@ const SearchForm: FC<Props> = ({setSearchGame}) => {
     },
     onSubmit: ({ value }) => {
       console.log(value)
-      alert(`Searching for: ${value.search}`)
       setSearchGame(value.search);
     },
   })

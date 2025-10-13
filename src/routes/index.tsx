@@ -16,10 +16,10 @@ function App() {
 
   const gamesQuery = queryOptions({
     queryKey: ['games', searchGame],
-    queryFn: () => searchGames(searchGame!),
+    queryFn: () => searchGames(searchGame!)
   })
 
-  const {data} = useSuspenseQuery(gamesQuery);
+  const {data,isLoading} = useSuspenseQuery(gamesQuery);
 
   console.log('Fetched games: ',data);
 
@@ -28,7 +28,7 @@ function App() {
       <section className="w-full mt-5 text-center">
         <h1 className="text-3xl font-bold">Welcome to the Steam App {searchGame}</h1>
         <SearchForm setSearchGame={setSearchGame}/>
-        <DisplayGrid games={data.search} total={data.total} />
+        <DisplayGrid isLoading={isLoading} games={data.search} total={data.total} />
       </section>
     </>
   )
