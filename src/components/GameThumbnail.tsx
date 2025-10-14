@@ -1,12 +1,16 @@
 import { Image } from '@unpic/react'
+import { Link } from '@tanstack/react-router'
+
 import type { game_info } from '@/type'
 import type { FC } from 'react'
+
 
 type Props = {
     game: game_info
 }
 const GameThumbnail: FC<Props> = ({ game }) => {
     return(
+        <Link to={`${game.id}`}>
         <div
             className="bg-gray-800 rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform duration-200"
           >
@@ -24,6 +28,7 @@ const GameThumbnail: FC<Props> = ({ game }) => {
               <p className="text-gray-400">{game.price}</p>
             </div>
           </div>
+        </Link>
     )
 }
 

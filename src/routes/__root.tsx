@@ -8,9 +8,11 @@ import appCss from '../styles.css?url'
 import MainLayout from '@/layout/MainLayout'
 import Footer from '@/components/Footer'
 import Error from '@/components/Error'
+import NotFound from '@/components/NotFound'
 
 export const Route = createRootRoute({
   errorComponent: Error,
+  notFoundComponent: NotFound,
   head: () => ({
     meta: [
       {
