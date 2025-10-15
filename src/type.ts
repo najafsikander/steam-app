@@ -54,3 +54,8 @@ export type game_details = {
     };
     sys_req: sys_req;
 }
+
+export type media = {
+    type:string;
+    url:string
+}
