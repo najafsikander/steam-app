@@ -49,7 +49,7 @@ export type game_details = {
         franchise: string;
     };
     media: {
-        screenshots: [string];
+        screenshot: [string];
         videos: [string];
     };
     sys_req: sys_req;
