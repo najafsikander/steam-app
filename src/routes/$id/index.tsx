@@ -1,9 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Image } from '@unpic/react'
-import { useEffect, useState } from 'react'
 
-import type { game_details, media } from '@/type'
+import type { game_details } from '@/type'
 import { fetchGameById } from '@/services/games.services'
+import IntroSection from '@/components/GameDetailsPage/IntroSection'
 
 export const Route = createFileRoute('/$id/')({
   loader: async ({ params }) => {
@@ -16,153 +15,12 @@ export const Route = createFileRoute('/$id/')({
 })
 
 function GameDetailsPage() {
-  const { game, gameId } = Route.useLoaderData()
-  const [currMedia, setCurrMedia] = useState<media>({type:'image',url:game.media.screenshot[0]})
-  const mainImage: string = game.media.screenshot[0]
-  // const medias: Array<any> = [];
-  const [medias, setCurrentMedias] = useState<Array<media>>([])
-
-  const combineAllMedias = () => {
-    for (const video of game.media.videos) {
-      setCurrentMedias((oldData) => [...oldData, { type: 'video', url: video }])
-    }
-
-    for (const img of game.media.screenshot) {
-      setCurrentMedias((oldData) => [...oldData, { type: 'image', url: img }])
-    }
-  }
-
-  console.log('Selected Game: ', game)
-
-  useEffect(() => {
-    combineAllMedias()
-  }, [])
-
-  useEffect(() => {
-    console.table(medias)
-  }, [medias])
-
-  const renderCurrentMedia = (media:media) => {
-    const {type,url} = media;
-    if(type === 'image') return <Image
-              src={url}
-              alt={url}
-              width={500}
-              height={500}
-              loading="lazy"
-              className="w-full"
-            />
-
-      if(type === 'video') return <video
-          width={500}
-          height={500}
-          controls
-          autoPlay
-          loop
-          playsInline
-          className="w-full"
-          onClick={() => setCurrMedia(media)}
-        >
-          <source src={url} type="video/webm" />
-          <source src={url} type="video/mp4" />
-        </video>
-  }
-
-  const renderMediaContent = (media: { type: string; url: string }) => {
-    const { type, url } = media
-    console.log('Current media: ', type, url)
-
-    // let mediaItem = (
-    //   <Image
-    //     key={url}
-    //     src={url}
-    //     alt={url}
-    //     width={100}
-    //     height={100}
-    //     className="w-[20vh] h-[10vh] cursor-pointer"
-    //     loading="lazy"
-    //     layout="fixed"
-    //     onClick={() => setCurrMediaDisplay(url)}
-    //   />
-    // )
-
-    let mediaItem;
-
-    if (type == 'image') {
-      mediaItem = (
-        <Image
-          key={url}
-          src={url}
-          alt={url}
-          width={100}
-          height={100}
-          className="w-[20vh] h-[10vh] cursor-pointer"
-          loading="lazy"
-          layout="fixed"
-          onClick={() => setCurrMedia(media)}
-        />
-      )
-    }
-
-    if (type == 'video') {
-      mediaItem = (
-        <video
-          width={100}
-          height={100}
-          controls
-          autoPlay
-          loop
-          playsInline
-          className="w-[20vh] h-[10vh] cursor-pointer"
-          onClick={() => setCurrMedia(media)}
-        >
-          <source src={url} type="video/webm" />
-          <source src={url} type="video/mp4" />
-        </video>
-      )
-    }
-
-    return mediaItem
-  }
+  const { game } = Route.useLoaderData()
 
   return (
     <>
       <main className="w-full min-h-screen my-4 px-4 bg-slate-200 flex flex-row justify-center">
-        <section className="w-2/3 flex justify-center bg-slate-700 gap-2">
-          {/* Left Side - Media */}
-          <div className="w-full basis-2/3 bg-slate-900 flex flex-col">
-            <h1 className="font-medium text-3xl mb-3">{game.name}</h1>
-            {renderCurrentMedia(currMedia)}
-            {/* <Image
-              src={currMediaDisplay}
-              alt={currMediaDisplay}
-              width={500}
-              height={500}
-              loading="lazy"
-              className="w-full"
-            /> */}
-            {medias.length > 0 && (
-              <div className="flex flex-row w-full h-auto overflow-x-scroll gap-2 mt-2">
-                {medias.map(
-                  (media: { type: string; url: string }) => renderMediaContent(media))}
-              </div>
-            )}
-          </div>
-
-          {/* Right Side - Info */}
-          <aside className="w-full basis-1/3 bg-slate-800">
-            <Image
-              src={mainImage}
-              alt={mainImage}
-              width={300}
-              height={300}
-              loading="lazy"
-              layout="fixed"
-              className="w-full mt-12 mb-3"
-            />
-            <p className="font-medium text-sm mb-3">{game.desc}</p>
-          </aside>
-        </section>
+        <IntroSection game={game} />
       </main>
     </>
   )

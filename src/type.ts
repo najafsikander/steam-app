@@ -28,7 +28,11 @@ export type external_links = {
 }
 
 export type sys_req = {
-    window: {
+    window?: {
+        min: [string];
+        recomm: [string];
+    },
+    linux?: {
         min: [string];
         recomm: [string];
     }
