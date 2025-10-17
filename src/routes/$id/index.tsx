@@ -4,6 +4,8 @@ import type { game_details } from '@/type'
 import { fetchGameById } from '@/services/games.services'
 import IntroSection from '@/components/GameDetailsPage/IntroSection'
 
+
+// TODO:COMPLETE THE PAGE
 export const Route = createFileRoute('/$id/')({
   loader: async ({ params }) => {
     const gameId = params.id
