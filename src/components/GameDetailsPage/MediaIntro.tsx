@@ -66,7 +66,7 @@ const MediaIntro: FC<Props> = ({ game }) => {
       )
   }
 
-  const renderMediaContent = (media: { type: string; url: string }) => {
+  const renderMediaContent = (media: { type: string; url: string }, index:number) => {
     const { type, url } = media
     console.log('Current media: ', type, url)
 
@@ -75,7 +75,7 @@ const MediaIntro: FC<Props> = ({ game }) => {
     if (type == 'image') {
       mediaItem = (
         <Image
-          key={url}
+          key={index}
           src={url}
           alt={url}
           width={100}
@@ -91,6 +91,7 @@ const MediaIntro: FC<Props> = ({ game }) => {
     if (type == 'video') {
       mediaItem = (
         <video
+          key={index}
           width={100}
           height={100}
           controls
@@ -116,8 +117,8 @@ const MediaIntro: FC<Props> = ({ game }) => {
         {renderCurrentMedia(currMedia)}
         {medias.length > 0 && (
           <div className="flex flex-row w-full h-auto overflow-x-scroll gap-2 mt-2">
-            {medias.map((media: { type: string; url: string }) =>
-              renderMediaContent(media),
+            {medias.map((media: { type: string; url: string }, index:number) =>
+              renderMediaContent(media,index),
             )}
           </div>
         )}

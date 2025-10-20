@@ -3,7 +3,9 @@ import { createFileRoute } from '@tanstack/react-router'
 import type { game_details } from '@/type'
 import { fetchGameById } from '@/services/games.services'
 import IntroSection from '@/components/GameDetailsPage/IntroSection'
-
+import PriceSection from '@/components/GameDetailsPage/PriceSection'
+import SupportedLanguages from '@/components/GameDetailsPage/SupportedLanguages'
+import ExternalLinks from '@/components/GameDetailsPage/ExternalLInks'
 
 // TODO:COMPLETE THE PAGE
 export const Route = createFileRoute('/$id/')({
@@ -22,7 +24,19 @@ function GameDetailsPage() {
   return (
     <>
       <main className="w-full min-h-screen my-4 px-4 bg-slate-200 flex flex-row justify-center">
-        <IntroSection game={game} />
+        <div className="flex flex-col items-center">
+          <IntroSection game={game} />
+
+          {/* Pricing & Supported Languages & External Links */}
+          <div className="w-2/3 flex flex-row gap-2  my-3">
+            <PriceSection pricing={game.pricing} />
+            {/* Supported Languages & External Links */}
+            <div className="w-1/3 bg-slate-900 p-3">
+              <SupportedLanguages languages={game.lang} />
+              <ExternalLinks external_links={game.external_links}/>
+            </div>
+          </div>
+        </div>
       </main>
     </>
   )

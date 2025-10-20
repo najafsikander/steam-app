@@ -1,4 +1,5 @@
 import { Image } from '@unpic/react'
+import TagButton from './TagButton'
 import type { FC } from 'react'
 import type { game_details } from '@/type'
 
@@ -45,19 +46,9 @@ const InfoIntro: FC<Props> = ({ game }) => {
         </p>
         <div className="flex w-full justify-start mt-1 gap-2">
           {fiveTags.map((tag: string) => (
-            <button
-              type="button"
-              className="text-xs font-medium bg-blue-500 text-cyan-300 py-1 px-2 hover:bg-cyan-300 hover:text-blue-500 cursor-pointer"
-            >
-              {tag}
-            </button>
+            <TagButton key={tag} tag={tag} />
           ))}
-          <button
-            type="button"
-            className="text-xs font-medium bg-blue-500 text-cyan-300 py-1 px-2 hover:bg-cyan-300 hover:text-blue-500 cursor-pointer"
-          >
-            &#x002B;
-          </button>
+          <TagButton tag={'+'}/>
         </div>
       </aside>
     </>

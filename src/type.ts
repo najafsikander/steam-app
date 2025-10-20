@@ -22,7 +22,7 @@ export type pricing = {
     discountPrice: string;
 }
 
-export type external_links = {
+export type external_link = {
     name: string;
     link: string;
 }
@@ -44,7 +44,7 @@ export type game_details = {
     release_date: string;
     about_game: string;
     pricing: [pricing];
-    external_links: [external_links];
+    external_links: [external_link];
     tags: [string];
     lang: [string];
     dev_details: {
