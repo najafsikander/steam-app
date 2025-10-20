@@ -6,6 +6,7 @@ import IntroSection from '@/components/GameDetailsPage/IntroSection'
 import PriceSection from '@/components/GameDetailsPage/PriceSection'
 import SupportedLanguages from '@/components/GameDetailsPage/SupportedLanguages'
 import ExternalLinks from '@/components/GameDetailsPage/ExternalLInks'
+import AboutGame from '@/components/GameDetailsPage/AboutGame'
 
 // TODO:COMPLETE THE PAGE
 export const Route = createFileRoute('/$id/')({
@@ -36,6 +37,8 @@ function GameDetailsPage() {
               <ExternalLinks external_links={game.external_links}/>
             </div>
           </div>
+
+          <AboutGame about_game={game.about_game}/>
         </div>
       </main>
     </>
