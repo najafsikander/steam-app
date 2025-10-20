@@ -7,6 +7,7 @@ import PriceSection from '@/components/GameDetailsPage/PriceSection'
 import SupportedLanguages from '@/components/GameDetailsPage/SupportedLanguages'
 import ExternalLinks from '@/components/GameDetailsPage/ExternalLInks'
 import AboutGame from '@/components/GameDetailsPage/AboutGame'
+import SystemReqMain from '@/components/GameDetailsPage/SystemReqMain'
 
 // TODO:COMPLETE THE PAGE
 export const Route = createFileRoute('/$id/')({
@@ -39,6 +40,7 @@ function GameDetailsPage() {
           </div>
 
           <AboutGame about_game={game.about_game}/>
+          <SystemReqMain sys_req={game.sys_req}/>
         </div>
       </main>
     </>
