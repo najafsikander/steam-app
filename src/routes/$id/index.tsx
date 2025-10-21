@@ -1,13 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import type { game_details } from '@/type'
-import { fetchGameById } from '@/services/games.services'
+import type { game_details, review } from '@/type'
+import { fetchGameById, fetchGameReviewsById } from '@/services/games.services'
 import IntroSection from '@/components/GameDetailsPage/IntroSection'
 import PriceSection from '@/components/GameDetailsPage/PriceSection'
 import SupportedLanguages from '@/components/GameDetailsPage/SupportedLanguages'
 import ExternalLinks from '@/components/GameDetailsPage/ExternalLInks'
 import AboutGame from '@/components/GameDetailsPage/AboutGame'
 import SystemReqMain from '@/components/GameDetailsPage/SystemReqMain'
+import ReviewsSummary from '@/components/GameDetailsPage/ReviewsSummary'
 
 // TODO:COMPLETE THE PAGE
 export const Route = createFileRoute('/$id/')({
@@ -15,13 +16,14 @@ export const Route = createFileRoute('/$id/')({
     const gameId = params.id
     // Fetch game details using the gameId
     const game: game_details = await fetchGameById(gameId)
-    return { gameId, game }
+    const reviews: Array<review> = await fetchGameReviewsById(gameId, 'mostrecent', 5)
+    return { gameId, game, reviews }
   },
   component: GameDetailsPage,
 })
 
 function GameDetailsPage() {
-  const { game } = Route.useLoaderData()
+  const { game, reviews } = Route.useLoaderData()
 
   return (
     <>
@@ -41,6 +43,7 @@ function GameDetailsPage() {
 
           <AboutGame about_game={game.about_game}/>
           <SystemReqMain sys_req={game.sys_req}/>
+          <ReviewsSummary reviews={reviews}/>
         </div>
       </main>
     </>

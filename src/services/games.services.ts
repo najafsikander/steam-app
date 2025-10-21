@@ -1,6 +1,6 @@
 
-import type { api_response, game_details, game_search_response } from '@/type';
-import { GAME_DETAILS_API_URL, GAME_SEARCH_API_URL, RAPID_HOST_HEADER, RAPID_HOST_VALUE, RAPID_KEY_HEADER } from "@/constants";
+import type { api_response, game_details, game_search_response, review } from '@/type';
+import { GAME_DETAILS_API_URL, GAME_REVIEWS_API_URL, GAME_SEARCH_API_URL, RAPID_HOST_HEADER, RAPID_HOST_VALUE, RAPID_KEY_HEADER } from "@/constants";
 
 const API_KEY: string = import.meta.env.VITE_RAPID_API_KEY;
 
@@ -36,6 +36,22 @@ export const fetchGameById = async (id: string) => {
         return game;
     } catch (error) {
         console.error("Error fetching game by ID:", error);
+        throw error;
+    }
+}
+
+export const fetchGameReviewsById = async (id: string, type: string, limit: number, offset = 0) => {
+    try {
+        if(!API_KEY) throw new Error("API key is not defined in environment variables");
+        const response = await fetch(`${GAME_REVIEWS_API_URL}/${type}/${id}?limit=${limit}&offset=${offset}`, headers);
+        console.log('GAME REVIEWS RESPONSE: ', response);
+        if(!response.ok) throw new Error("Network response was not ok");
+        const data: api_response = await response.json();
+        const reviews:Array<review> = data.data.reviews;
+        console.log("Fetched reviews:", reviews);
+        return reviews;
+    } catch (error) {
+        console.error("Error fetching game reviews by ID:", error);
         throw error;
     }
 }

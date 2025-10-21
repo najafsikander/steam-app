@@ -63,3 +63,12 @@ export type media = {
     type:string;
     url:string
 }
+
+export type review = {
+      review_id: string;
+      title: string;
+      date: string;
+      content: string;
+      user_profile: string;
+      user_name: string;
+    };
