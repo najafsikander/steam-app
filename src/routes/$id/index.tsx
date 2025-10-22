@@ -11,6 +11,7 @@ import SystemReqMain from '@/components/GameDetailsPage/SystemReqMain'
 import ReviewsSummary from '@/components/GameDetailsPage/ReviewsSummary'
 
 // TODO:COMPLETE THE PAGE
+// TODO:CREATE SEPARATE PAGE FOR REVIEWS
 export const Route = createFileRoute('/$id/')({
   loader: async ({ params }) => {
     const gameId = params.id
