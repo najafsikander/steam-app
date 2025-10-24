@@ -12,7 +12,7 @@ const IntroSection: FC<Props> = ({ game }) => {
 
   return (
     <>
-      <section className="w-2/3 flex justify-center bg-slate-700 gap-2">
+      <section className="w-2/3 flex justify-center gap-2">
         {/* Left Side - Media. */}
         <MediaIntro game={game} />
 

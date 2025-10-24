@@ -10,7 +10,6 @@ import AboutGame from '@/components/GameDetailsPage/AboutGame'
 import SystemReqMain from '@/components/GameDetailsPage/SystemReqMain'
 import ReviewsSummary from '@/components/GameDetailsPage/ReviewsSummary'
 
-// TODO:COMPLETE THE PAGE
 // TODO:CREATE SEPARATE PAGE FOR REVIEWS
 export const Route = createFileRoute('/$id/')({
   loader: async ({ params }) => {
@@ -28,7 +27,7 @@ function GameDetailsPage() {
 
   return (
     <>
-      <main className="w-full min-h-screen my-4 px-4 bg-slate-200 flex flex-row justify-center">
+      <main className="w-full min-h-screen my-4 px-4 flex flex-row justify-center">
         <div className="flex flex-col items-center">
           <IntroSection game={game} />
 
