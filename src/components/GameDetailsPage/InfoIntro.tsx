@@ -1,12 +1,16 @@
 import { Image } from '@unpic/react'
+import { Link } from '@tanstack/react-router'
+
 import TagButton from './TagButton'
+
 import type { FC } from 'react'
 import type { game_details } from '@/type'
 
 type Props = {
-  game: game_details
+  game: game_details,
+  gameId: string
 }
-const InfoIntro: FC<Props> = ({ game }) => {
+const InfoIntro: FC<Props> = ({ game, gameId }) => {
   const mainImage: string = game.media.screenshot[0]
   const fiveTags: Array<string> = game.tags.slice(0, 5)
 
@@ -23,9 +27,11 @@ const InfoIntro: FC<Props> = ({ game }) => {
           className="w-full mt-12 mb-3"
         />
         <p className="font-medium text-sm mb-3">{game.desc}</p>
+        <Link to="/reviews/$id" params={{ id: gameId }}>
         <h4 className="font-bold underline cursor-pointer mt-6">
           Click Here For Reviews
         </h4>
+        </Link>
         <p className="text-gray-400 text-sm font-medium mt-8">
           RELEASE DATE: <span className="ml-5">{game.release_date}</span>
         </p>

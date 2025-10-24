@@ -23,13 +23,13 @@ export const Route = createFileRoute('/$id/')({
 })
 
 function GameDetailsPage() {
-  const { game, reviews } = Route.useLoaderData()
+  const { game, reviews, gameId } = Route.useLoaderData()
 
   return (
     <>
       <main className="w-full min-h-screen my-4 px-4 flex flex-row justify-center">
         <div className="flex flex-col items-center">
-          <IntroSection game={game} />
+          <IntroSection game={game} gameId={gameId} />
 
           {/* Pricing & Supported Languages & External Links */}
           <div className="w-2/3 flex flex-row gap-2  my-3">

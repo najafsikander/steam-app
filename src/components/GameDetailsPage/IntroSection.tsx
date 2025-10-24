@@ -5,9 +5,10 @@ import type { game_details } from '@/type'
 import type { FC } from 'react'
 
 type Props = {
-  game: game_details
+  game: game_details,
+  gameId: string
 }
-const IntroSection: FC<Props> = ({ game }) => {
+const IntroSection: FC<Props> = ({ game, gameId }) => {
   console.log('Selected Game: ', game)
 
   return (
@@ -17,7 +18,7 @@ const IntroSection: FC<Props> = ({ game }) => {
         <MediaIntro game={game} />
 
         {/* Right Side - Info. */}
-        <InfoIntro game={game} />
+        <InfoIntro game={game} gameId={gameId} />
       </section>
     </>
   )
