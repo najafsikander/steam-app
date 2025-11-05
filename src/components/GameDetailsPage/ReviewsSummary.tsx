@@ -8,13 +8,23 @@ import type { review } from "@/type";
 
 type Props = {
     reviews: Array<review>;
+    isSummary?: boolean;
+    heading: string;
 }
 
-const ReviewsSummary:FC<Props> = ({ reviews }) => {
+const ReviewsSummary:FC<Props> = ({ reviews, heading, isSummary }) => {
     return(
         <>
-        <section className="w-2/3 bg-slate-800 p-3 mt-1 mb-3">
+        <section className={`${isSummary ? 'w-2/3' : 'w-full'} bg-slate-800 p-3 mt-1 mb-3`}>
+        {
+            isSummary &&
             <h2 className="text-2xl font-medium">Reviews Summary<span className="text-sm">(Most Recent)</span></h2>
+        }
+        {
+            !isSummary &&
+            <h2 className="text-2xl font-medium">{heading}</h2>
+
+        }
             <GradientBorder/>
             {
                 reviews.map((review:review) => (

@@ -43,7 +43,7 @@ function GameDetailsPage() {
 
           <AboutGame about_game={game.about_game}/>
           <SystemReqMain sys_req={game.sys_req}/>
-          <ReviewsSummary reviews={reviews}/>
+          <ReviewsSummary reviews={reviews} isSummary={true} heading=""/>
         </div>
       </main>
     </>
