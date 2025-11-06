@@ -1,10 +1,11 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tanstack-start-app",
+  "name": "steam-app",
   "compatibility_date": "2025-09-02",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
   "vars": {
-    "MY_VAR": "Hello from Cloudflare"
+    "MY_VAR": "Hello from Cloudflare",
+    "VITE_RAPID_API_KEY": "621b5a1b1dmshb2cd4ebcd50e9cfp1a7c99jsnedeef3fbc421"
   }
 }
