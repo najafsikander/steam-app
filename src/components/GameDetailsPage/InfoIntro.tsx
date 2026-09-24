@@ -5,6 +5,7 @@ import TagButton from './TagButton'
 
 import type { FC } from 'react'
 import type { game_details } from '@/type'
+import { isValidMediaUrl } from '@/helpers/media'
 
 type Props = {
   game: game_details,
@@ -17,15 +18,17 @@ const InfoIntro: FC<Props> = ({ game, gameId }) => {
   return (
     <>
       <aside className="w-full basis-1/3 bg-slate-800">
-        <Image
-          src={mainImage}
-          alt={mainImage}
-          width={300}
-          height={300}
-          loading="lazy"
-          layout="fixed"
-          className="w-full mt-12 mb-3"
-        />
+        {isValidMediaUrl(mainImage) && (
+          <Image
+            src={mainImage}
+            alt={mainImage}
+            width={300}
+            height={300}
+            loading="lazy"
+            layout="fixed"
+            className="w-full mt-12 mb-3"
+          />
+        )}
         <p className="font-medium text-sm mb-3">{game.desc}</p>
         <Link to="/reviews/$id" params={{ id: gameId }}>
         <h4 className="font-bold underline cursor-pointer mt-6">

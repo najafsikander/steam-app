@@ -3,6 +3,7 @@ import { Image } from '@unpic/react'
 
 import type { game_details, media } from '@/type'
 import type { FC } from 'react'
+import { isValidMediaUrl } from '@/helpers/media'
 
 type Props = {
   game: game_details
@@ -13,16 +14,20 @@ const MediaIntro: FC<Props> = ({ game }) => {
 
   const [currMedia, setCurrMedia] = useState<media>({
     type: 'image',
-    url: game.media.screenshot[0],
+    url: game.media.screenshot[0] || '',
   })
 
   const combineAllMedias = () => {
     for (const video of game.media.videos) {
-      setCurrentMedias((oldData) => [...oldData, { type: 'video', url: video }])
+      if (isValidMediaUrl(video)) {
+        setCurrentMedias((oldData) => [...oldData, { type: 'video', url: video }])
+      }
     }
 
     for (const img of game.media.screenshot) {
-      setCurrentMedias((oldData) => [...oldData, { type: 'image', url: img }])
+      if (isValidMediaUrl(img)) {
+        setCurrentMedias((oldData) => [...oldData, { type: 'image', url: img }])
+      }
     }
   }
 
@@ -36,7 +41,8 @@ const MediaIntro: FC<Props> = ({ game }) => {
 
   const renderCurrentMedia = (media: media) => {
     const { type, url } = media
-    if (type === 'image')
+    console.log('Current media: ', type, url)
+    if (type === 'image' && isValidMediaUrl(url))
       return (
         <Image
           src={url}
@@ -48,7 +54,7 @@ const MediaIntro: FC<Props> = ({ game }) => {
         />
       )
 
-    if (type === 'video')
+    if (type === 'video' && isValidMediaUrl(url))
       return (
         <video
           width={500}
@@ -72,7 +78,7 @@ const MediaIntro: FC<Props> = ({ game }) => {
 
     let mediaItem
 
-    if (type == 'image') {
+    if (type == 'image' && isValidMediaUrl(url)) {
       mediaItem = (
         <Image
           key={index}
@@ -88,7 +94,7 @@ const MediaIntro: FC<Props> = ({ game }) => {
       )
     }
 
-    if (type == 'video') {
+    if (type == 'video' && isValidMediaUrl(url)) {
       mediaItem = (
         <video
           key={index}
