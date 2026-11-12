@@ -7,24 +7,26 @@ import { isValidMediaUrl } from '@/helpers/media'
 
 type Props = {
   game: game_details
+  screenshots: Array<string>
+  videos: Array<string>
 }
 
-const MediaIntro: FC<Props> = ({ game }) => {
+const MediaIntro: FC<Props> = ({ game, screenshots, videos }) => {
   const [medias, setCurrentMedias] = useState<Array<media>>([])
 
   const [currMedia, setCurrMedia] = useState<media>({
     type: 'image',
-    url: game.media.screenshot[0] || '',
+    url: screenshots[0] || '',
   })
 
   const combineAllMedias = () => {
-    for (const video of game.media.videos) {
+    for (const video of videos) {
       if (isValidMediaUrl(video)) {
         setCurrentMedias((oldData) => [...oldData, { type: 'video', url: video }])
       }
     }
 
-    for (const img of game.media.screenshot) {
+    for (const img of screenshots) {
       if (isValidMediaUrl(img)) {
         setCurrentMedias((oldData) => [...oldData, { type: 'image', url: img }])
       }

@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import type { game_details, review } from '@/type'
-import { fetchGameById, fetchGameReviewsById } from '@/services/games.services'
+import { fetchGameById, fetchGameReviewsById, fetchGameScreenshotsById, fetchGameVideosById } from '@/services/games.services'
 import IntroSection from '@/components/GameDetailsPage/IntroSection'
 import PriceSection from '@/components/GameDetailsPage/PriceSection'
 import SupportedLanguages from '@/components/GameDetailsPage/SupportedLanguages'
@@ -15,20 +15,22 @@ export const Route = createFileRoute('/$id/')({
     const gameId = params.id
     // Fetch game details using the gameId
     const game: game_details = await fetchGameById(gameId)
+    const screenshots = await fetchGameScreenshotsById(gameId)
+    const videos = await fetchGameVideosById(gameId)
     const reviews: Array<review> = await fetchGameReviewsById(gameId, 'mostrecent', 5)
-    return { gameId, game, reviews }
+    return { gameId, game, screenshots, videos, reviews }
   },
   component: GameDetailsPage,
 })
 
 function GameDetailsPage() {
-  const { game, reviews, gameId } = Route.useLoaderData()
+  const { game, reviews, gameId, screenshots, videos } = Route.useLoaderData()
 
   return (
     <>
       <main className="w-full min-h-screen my-4 px-4 flex flex-row justify-center">
         <div className="flex flex-col items-center">
-          <IntroSection game={game} gameId={gameId} />
+          <IntroSection game={game} gameId={gameId} screenshots={screenshots} videos={videos} />
 
           {/* Pricing & Supported Languages & External Links */}
           <div className="w-2/3 flex flex-row gap-2  my-3">

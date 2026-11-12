@@ -6,16 +6,18 @@ import type { FC } from 'react'
 
 type Props = {
   game: game_details,
-  gameId: string
+  gameId: string,
+  screenshots: Array<string>,
+  videos: Array<string>
 }
-const IntroSection: FC<Props> = ({ game, gameId }) => {
+const IntroSection: FC<Props> = ({ game, gameId, screenshots, videos }) => {
   console.log('Selected Game: ', game)
 
   return (
     <>
       <section className="w-2/3 flex justify-center gap-2">
         {/* Left Side - Media. */}
-        <MediaIntro game={game} />
+        <MediaIntro game={game} screenshots={screenshots} videos={videos} />
 
         {/* Right Side - Info. */}
         <InfoIntro game={game} gameId={gameId} />

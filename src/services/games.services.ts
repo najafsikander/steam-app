@@ -1,6 +1,6 @@
 
 import type { api_response, game_details, game_search_response, review } from '@/type';
-import { GAME_DETAILS_API_URL, GAME_REVIEWS_API_URL, GAME_SEARCH_API_URL, RAPID_HOST_HEADER, RAPID_HOST_VALUE, RAPID_KEY_HEADER } from "@/constants";
+import { GAME_DETAILS_API_URL, GAME_REVIEWS_API_URL, GAME_SCREENSHOTS_API_URL, GAME_SEARCH_API_URL, GAME_VIDEOS_API_URL, RAPID_HOST_HEADER, RAPID_HOST_VALUE, RAPID_KEY_HEADER } from "@/constants";
 
 const API_KEY: string = import.meta.env.VITE_RAPID_API_KEY;
 
@@ -36,6 +36,36 @@ export const fetchGameById = async (id: string) => {
         return game;
     } catch (error) {
         console.error("Error fetching game by ID:", error);
+        throw error;
+    }
+}
+
+export const fetchGameScreenshotsById = async (id: string) => {
+    try {
+        if (!API_KEY) throw new Error("API key is not defined in environment variables");
+        const response = await fetch(`${GAME_SCREENSHOTS_API_URL}${encodeURIComponent(id)}`,headers);
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data: api_response = await response.json();
+        const screenshots: Array<string> = data.data.screenshot;
+        console.log("Fetched screenshots:", screenshots);
+        return screenshots;
+    } catch (error) {
+        console.error("Error fetching game screenshots by ID:", error);
+        throw error;
+    }
+}
+
+export const fetchGameVideosById = async (id: string) => {
+    try {
+        if (!API_KEY) throw new Error("API key is not defined in environment variables");
+        const response = await fetch(`${GAME_VIDEOS_API_URL}${encodeURIComponent(id)}`,headers);
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data: api_response = await response.json();
+        const videos: Array<string> = data.data.videos;
+        console.log("Fetched videos:", videos);
+        return videos;
+    } catch (error) {
+        console.error("Error fetching game videos by ID:", error);
         throw error;
     }
 }
