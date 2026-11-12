@@ -9,15 +9,15 @@ import { isValidMediaUrl } from '@/helpers/media'
 
 type Props = {
   game: game_details,
-  gameId: string
+  gameId: string,
+  mainImage: string
 }
-const InfoIntro: FC<Props> = ({ game, gameId }) => {
-  const mainImage: string = game.media.screenshot[0]
+const InfoIntro: FC<Props> = ({ game, gameId, mainImage }) => {
   const fiveTags: Array<string> = game.tags.slice(0, 5)
 
   return (
     <>
-      <aside className="w-full basis-1/3 bg-slate-800">
+      <aside className="w-full basis-1/3">
         {isValidMediaUrl(mainImage) && (
           <Image
             src={mainImage}

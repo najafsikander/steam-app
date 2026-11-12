@@ -20,7 +20,7 @@ const IntroSection: FC<Props> = ({ game, gameId, screenshots, videos }) => {
         <MediaIntro game={game} screenshots={screenshots} videos={videos} />
 
         {/* Right Side - Info. */}
-        <InfoIntro game={game} gameId={gameId} />
+        <InfoIntro game={game} gameId={gameId} mainImage={screenshots[0]} />
       </section>
     </>
   )
